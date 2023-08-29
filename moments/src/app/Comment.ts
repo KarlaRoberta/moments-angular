@@ -1,9 +1,8 @@
-export interface Comment{
-  id?: string;
+export interface Comment {
+  id?: number;
   text: string;
   username: string;
-  momentID: number;
+  momentId: number;
   created_at?: string;
-  update_at?: string;
-
+  updated_at?: string;
 }
