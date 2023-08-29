@@ -1,27 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Moment } from '../Moments';
-import{Response} from '../Response'
 
 import { environment } from 'src/environments/environment';
+import { Comment } from 'src/app/Comment';
+import { Response } from 'src/app/Response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
-export class MomentService {
+export class CommentService {
   private baseApiUrl = environment.baseApiUrl;
   private apiUrl = `${this.baseApiUrl}api/moments`;
 
   constructor(private http: HttpClient) {}
 
-  getMoments(): Observable<Response<Moment[]>>{
-    return this.http.get<Response<Moment[]>>(this.apiUrl);
+  createComment(data: Comment): Observable<Response<Comment>> {
+    const url = `${this.apiUrl}/${data.momentId}/comments`;
+    return this.http.post<Response<Comment>>(url, data);
   }
-
-  createMoment(formData: FormData): Observable<FormData>{
-    return this.http.post<FormData>(this.apiUrl, formData);
-  }
-
 }
